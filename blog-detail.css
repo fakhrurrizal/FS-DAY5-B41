@@ -1,0 +1,27 @@
+body {
+    margin: 0;
+}
+.detail-blog{
+    padding: 50px 0;
+    display: flex;
+    justify-content: center;
+}
+.detail-blog .detail-blog-card {
+    background-color: grey;
+}
+
+.detail-blog .detail-blog-card img{
+    width: 100%;
+}
+
+.detail-blog .detail-blog-card .detail-blog-title{
+    font-size: 60px;
+    font-weight: 700;
+}
+
+.detail-blog .detail-blog-card .detail-blog-content{
+    font-size: 20px;
+}
+.detail-blog .detail-blog-card .detail-blog-author{
+    
+}

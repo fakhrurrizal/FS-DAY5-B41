@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300&family=Roboto:wght@300&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+    <title>My Project</title>
+</head>
+<body>
+    <nav>
+        <div class="logo">
+            <a href="index.html"><img src="./assets/avatar.png" ></a>
+        </div>
+        <div class="nav-right">
+            <ul>
+                <li><a href="index.html">Home</a></li>
+                <li><a href="blog.html" >My Project</a></li>
+            </ul>
+        </div>
+        <a href="contact.html" class="nav-left" >Contact Me</a>
+    </nav>
+    <div class="blog">
+        <div class="blog-form">
+            <div class="form-container">
+                <form onsubmit="addProject(event); this.reset(); return false;" >
+                    <h1 class="h1">Add My Project</h1>
+                    <div>
+                        <label for="input-project">Project Name</label>
+                        <input type="text" id="input-project" class="input-project">
+                    </div>
+                    <div class="date">
+                        <div>
+                            <label for="input-start-date">Start Date</label>
+                            <input type="date" id="input-start-date" class="input-date">
+                        </div>
+                        <div>
+                            <label for="input-end-date">End Date</label>
+                            <input type="date" id="input-end-date" class="input-date">
+                        </div>
+                    </div>
+                    <div>
+                        <label >Technologies</label>
+                    </div>
+                    <div class="check1">     
+                        <div>
+                            <p><input type='checkbox' name="inputCheck" value='React Js' />React Js</p>
+                            <p><input type='checkbox' name="inputCheck" value='Node Js' />Node Js</p>
+                        </div>
+                        <div class="check2">
+                            <p><input type='checkbox'  name="inputCheck" value='Next Js' />Javascript</p>
+                            <p><input type='checkbox'  name="inputCheck" value='Vue Js' />Vue Js</p></div>
+                        </div>
+                    <div>
+                        <label for="input-description">Description</label>
+                        <textarea id="input-description"></textarea>
+                    </div>
+                   
+                    <div class="upload-file">
+                        <label for="input-image">Upload Image</label>
+                        <div class="input-image-content" >
+                            <input type="file" id="input-blog-image" class="upload-image" >
+                        </div>
+                    </div>
+                    <div>
+                        <button class="btn-blog">Submit</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+        <h1 class="h1">My Project</h1>
+        <div id="contents" class="blog-list">
+            <div class="blog-list-item">
+                <div class="blog-image">
+                    <img src="./assets/content3.png">
+                </div>
+               <div class="blog-content"> 
+                    <h1 class="title">
+                        <a href="blog-detail.html">Dumbways Mobile App - 2021</a>
+                    </h1>
+                    <div class="detail-blog-content">
+                        Durasi : 3 bulan yang lalu
+                    </div>
+                    <p>
+                        App that used for dumbways student, it was deployed
+                        and can downloaded on playstore. Happy Download
+                    </p>
+               </div>
+               <div class="icon-download">
+                    <img src="./assets/playstore.png" alt="Playstore">
+                    <img src="./assets/android.png" alt="Android">
+                    <img src="./assets/java.png" alt="Java">
+               </div>
+               <div class="btn-edit">
+                    <button>update</button>
+                    <button>delete</button>
+               </div>
+            </div>
+            <div class="blog-list-item">
+                <div class="blog-image">
+                    <img src="./assets/content5.png">
+                </div>
+               <div class="blog-content"> 
+                    <h1 class="title">
+                        <a href="blog-detail.html">Dumbways Mobile App - 2021</a>
+                    </h1>
+                    <div class="detail-blog-content">
+                        Durasi : 1 bulan yang lalu
+                    </div>
+                    <p>
+                        App that used for dumbways student, it was deployed
+                        and can downloaded on playstore. Happy Download
+                    </p>
+               </div>
+               <div class="icon-download">
+                    <img src="./assets/playstore.png" alt="Playstore">
+                    <img src="./assets/android.png" alt="Android">
+                    <img src="./assets/java.png" alt="Java">
+               </div>
+               <div class="btn-edit">
+                    <button>update</button>
+                    <button>delete</button>
+               </div>
+            </div>
+            <div class="blog-list-item">
+                <div class="blog-image">
+                    <img src="./assets/content2.png">
+                </div>
+               <div class="blog-content"> 
+                    <h1 class="title">
+                        <a href="blog-detail.html">Dumbways Mobile App - 2021</a>
+                    </h1>
+                    <div class="detail-blog-content">
+                        Durasi : 2 bulan yang lalu
+                    </div>
+                    <p>
+                        App that used for dumbways student, it was deployed
+                        and can downloaded on playstore. Happy Download
+                    </p>
+               </div>
+               <div class="icon-download">
+                    <img src="./assets/playstore.png" alt="Playstore">
+                    <img src="./assets/android.png" alt="Android">
+                    <img src="./assets/java.png" alt="Java">
+               </div>
+               <div class="btn-edit">
+                    <button>update</button>
+                    <button>delete</button>
+               </div>
+            </div>
+            <br/>
+        </div>
+    </div>
+ 
+</body>
+<script src="blog.js"></script>
+</html>
