@@ -5,14 +5,17 @@ body{
 
 /* Styling Index.html */
 .layout{
-    background-color: white;
     width: 90%;
     height: auto;
-    border-radius: 4px;
+    border-radius: 6px;
     padding: 5px;
     display: flex;
-    box-shadow: 2px 2px 8px rgba(0, 0, 0, 0.322);
-    margin: 50px auto;
+    box-shadow: 2px 4px 10px rgba(0, 0, 0, 0.637);
+    margin: 100px auto;
+}
+.page{
+    background-color: rgba(128, 128, 128, 0.24);
+    height: 800px;
 }
 h2{
     font-family: 'Poppins', sans-serif;
@@ -23,20 +26,21 @@ h2{
     width: 20vh;
     padding-right: 10px;
 }
-.nav-left{
-    margin-left: 50%;
+.btn-nav{
+    margin-left: 2%;
     border: 1px solid black;
     background-color: black;
-    width: 100px;
+    width: 130px;
     text-align: center;
     border-radius: 6px;
     color: white;
     font-weight: bold;
-    padding: 8px 15px;
+    padding: 8px 20px;
     font-size: 16px;
     font-family: 'Poppins', sans-serif;
 }
-.nav-left:hover{
+
+.btn-nav:hover{
     background-color: transparent;
     color: black;
     transition: 0.4s;
@@ -73,7 +77,6 @@ p{
 }
 a{
     text-decoration: none;
-    color : black
 }
 a:hover{
     text-decoration: none;
@@ -105,26 +108,25 @@ nav{
     align-items: center;
     background-color: rgba(128, 128, 128, 0.514);
 }
-nav ul {
+.nav-item {
     display: flex;
     list-style-type: none;
     align-items: center;
 }
-nav ul li a{
+.nav-link{
     margin-right: 15px;
     font-weight: bold;
     font-size: 18px;
-    padding: 8px 10px;
-
+    width: 150px;
+    color: black;
+    text-decoration: none;
     font-family: 'Poppins', sans-serif;
 }
-nav ul li a:hover{
+.nav-link:hover{
     border-radius: 6px;
-    padding: 8px 10px;
-    width: 100px;
-    color: white;
+    border: 1px solid black;
     transition: 0.4s;
-    background-color: black;
+
 }
 .fitur{
     display: flex;
@@ -150,6 +152,9 @@ nav ul li a:hover{
 .btn-group{
     margin: 0 auto;
     display: flex;
+}
+.btn-group a{
+    text-decoration: none;
 }
 /* Styling Contact Me */
 .form-contact{
@@ -208,11 +213,14 @@ select{
 
 /* Blog Form */
 
+.blog{
+    background-color: rgba(128, 128, 128, 0.192);
+}
 .blog-form{
     font-family: 'Poppins', sans-serif;
     display: flex;
-    background-color: rgba(128, 128, 128, 0.226);
-    margin-bottom: 60px;
+
+
     justify-content: center;
 
 }
@@ -233,7 +241,7 @@ select{
     font-weight: 500;
 }
 
-.input-project, .input-date, .input-contact,select, .upload-image, textarea{
+.input-project, .input-date, .input-contact,select, .upload-image, .textarea{
     width: 95%;
     font-size: 16px;
     box-shadow: 0px 2px 3px grey;
@@ -248,12 +256,12 @@ select{
 }
 .check1{
     display: flex;
-    padding-left: 20px;
     margin-top: 10px;
 }
 .check2{
-    margin-left: 50px;
+    margin-left: 40px;
 }
+
 .img-logo{
     width: 20px;
     font-weight: bold;
@@ -262,16 +270,18 @@ select{
     height: 150px;
 }
 .blog-list{
-    margin:  80px 100px;
+    margin:  10px 100px;
     display: flex;
+
     width: 100%;
     align-items: center;
     flex-direction: row;
 }
 .blog-list .blog-list-item{
-    width: 23%;
+    width: 25%;
+    flex-direction: row;
     padding: 15px;
-    margin: 20px 25px;
+    margin: 20px 30px;
     box-shadow: 0 2px 8px rgba(0, 0, 0, 0.404);
     border-radius: 10px;
 }
@@ -288,7 +298,8 @@ select{
     display: flex;
 }
 #input-start-date, #input-end-date{
-    width: 260px;
+    width: 270px;
+    box-shadow: 0px 2px 3px grey;
 }
 
 .input-image-content{
@@ -325,11 +336,16 @@ select{
     border-radius: 8px;
 }
 .title{
-    font-size: 18px;
+    font-size: 20px;
+    margin: 15px 0;
+}
+.title a{
+    text-decoration: none;
 }
 .detail-blog-content{
     font-size: 15px;
-    margin-top: -10px;
+    margin-top: -5px;
+    margin-bottom: 10px;
     color: rgba(0, 0, 0, 0.726);
     font-weight: 500;
     font-family: 'Poppins', sans-serif;
@@ -340,7 +356,7 @@ select{
     font-family: 'Poppins', sans-serif;
 }
 .icon-download img{
-    width: 11%;
+    width: 18%;
     padding: 10px;
 }
 .icon-download{
@@ -402,7 +418,4 @@ select{
 .short-description i{
     font-size: 35px;
     padding: 20px 15px;
-}
-.short-descript{
-    
 }

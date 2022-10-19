@@ -4,21 +4,28 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css">
     <link rel="stylesheet" href="./style.css">
     <title>Nav</title>
 </head>
 <body>
-    <nav>
-        <div class="logo">
-            <a href="index.html"><img src="./assets/avatar.png" ></a>
-        </div>
-        <div class="nav-right">
-            <ul>
-                <li><a href="index.html">Home</a></li>
-                <li><a href="#">About</a></li>
+    <nav class="navbar navbar-expand-lg bg-light">
+        <div class="container-fluid">
+          <a class="navbar-brand ms-5 " href="#">
+            <img src="./assets/avatar.png" alt="Iphone" width="150px">
+          </a>
+          <div class="collapse navbar-collapse mt-2 ms-4 " id="navbarSupportedContent">
+            <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+              <li class="nav-item">
+                <a class="nav-link fw-bold text-center fs-5" aria-current="page" href="#">Home</a>
+              </li>
+              <li class="nav-item ">
+                <a class="nav-link text-center fs-5" href="#">Add Project</a>
+              </li>
             </ul>
+            <a href="./contact.html"><button type="button" class="btn-nav btn-dark me-5 fw-bold p-1">Contact Me</button></a>
+          </div>
         </div>
-        <a href="contact.html" class="nav-left">Contact Me</a>
-    </nav>
+      </nav>
 </body>
 </html>
