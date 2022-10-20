@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300&family=Roboto:wght@300&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="public/css/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css">
+
+    <style>body{background-color: rgba(128, 128, 128, 0.226);}</style>
+    <title>Detail BLog</title>
+</head>
+<body>
+    <nav class="navbar navbar-expand-lg bg-light">
+        <div class="container-fluid">
+          <a class="navbar-brand ms-5 " href="/">
+            <img src="/public/img/avatar.png" alt="Iphone" width="150px">
+          </a>
+          <div class="collapse navbar-collapse mt-2 ms-4 " id="navbarSupportedContent">
+            <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+              <li class="nav-item">
+                <a class="nav-link fw-bold text-center fs-5 text-dark" aria-current="page" href="/">Home</a>
+              </li>
+              <li class="nav-item ">
+                <a class="nav-link fw-bold text-center fs-5 text-dark " href="/blog">Add Project</a>
+              </li>
+            </ul>
+            <a href="/contact"><button type="button" class="btn-nav btn-dark me-5 fw-bold p-1">Contact Me</button></a>
+          </div>
+        </div>
+      </nav>
+    {{.Id}}
+    <div class="detail-project">
+        <h1 class="h1">{{.Title}}</h1>
+        <div class="description-project">
+            <div class="detail-blog-img">
+                <div >
+                    <img src="public/img/content3.png" >
+                </div>
+                <div class="short-description">
+                    <h2>Duration</h2>
+                    <i class="fa-solid fa-calendar-days"></i> 12 Oct 2022 - 13 Feb 2022 <br/>
+                    <i class="fa-regular fa-clock"></i> 1 Month
+                    <h2 class="h2-technologies">Technologies</h2>
+                    <i class="fa-brands fa-react"></i>React Js 
+                    <i class="fa-brands fa-js"></i> Javascript <br/>
+                    <i class="fa-brands fa-node-js"></i>Node Js
+                    <i class="fa-brands fa-vuejs"></i> Vue Js
+                </div>
+                
+            </div>
+            <p class="description-content">
+                {{.Content}}}
+            </p>
+        </div>
+    </div>
+</body>
+</html>

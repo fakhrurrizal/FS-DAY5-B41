@@ -1,0 +1,58 @@
+<html>
+    <head>
+        <link rel="stylesheet" href="/public/css/style.css">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css" integrity="sha512-xh6O/CkQoPOWDdYTDqeRdPCVd1SpvCA9XXcUnZS2FmJNp1coAFzvtCN9BmamE+4aHK8yyUHUSCcJHgXloTyT2A==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+      <title>Add Form</title>
+      </head>
+    <body>
+        <!-- navbar -->
+        <nav class="navbar navbar-expand-lg bg-light">
+            <div class="container-fluid">
+              <a class="navbar-brand ms-5 " href="/">
+                <img src="/public/img/avatar.png" alt="Iphone" width="150px">
+              </a>
+              <div class="collapse navbar-collapse mt-2 ms-4 " id="navbarSupportedContent">
+                <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                  <li class="nav-item">
+                    <a class="nav-link fw-bold text-center fs-5 text-dark" aria-current="page" href="/">Home</a>
+                  </li>
+                  <li class="nav-item ">
+                    <a class="nav-link fw-bold text-center fs-5 text-dark " href="/blog">Add Project</a>
+                  </li>
+                </ul>
+                <a href="/contact"><button type="button" class="btn-nav btn-dark me-5 fw-bold p-1">Contact Me</button></a>
+              </div>
+            </div>
+          </nav>
+        <div class="blog">
+            <div class="blog-form">
+                <div class="form-container">
+                    <form action="/add-blog" method="POST">
+                        <h1>Create Post Blog</h1>
+                        <div>
+                            <label for="input-title">Title</label>
+                            <input name="inputTitle" id="inputTitle">
+                        </div>
+                        <div>
+                            <label for="input-content">Content</label>
+                            <textarea name="inputContent" id="inputContent"></textarea>
+                        </div>
+                        <div>
+                            <label>Upload Image</label>'
+                            <div class="input-blog-image-group">
+                                <label for="input-blog-image">
+                                    <p>Attach File</p>
+                                    
+                                </label>
+                                <input type="file" id="input-blog-image">
+                            </div>
+                        </div>
+                        <div>
+                            <button>Post Blog</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </body>
+</html>
