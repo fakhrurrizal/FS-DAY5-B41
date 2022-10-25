@@ -6,37 +6,90 @@ import (
 	"log"
 	"net/http"
 	"strconv"
+	"time"
 
 	"github.com/gorilla/mux"
 )
 
+// STRUCT TEMPLATE
+type Project struct {
+	ProjectName         string
+	ProjectStartDate    string
+	ProjectEndDate      string
+	ProjectDuration     string
+	ProjectDescription  string
+	ProjectTechnologies [4]string
+}
+
+// LOCAL DATABASE
+var ProjectList = []Project{
+	// 	{
+	// 		ProjectName:         "Bootcamp DumbWays - 2022",
+	// 		ProjectStartDate:    "02 October 2021",
+	// 		ProjectEndDate:      "03 Januari 2022",
+	// 		ProjectDuration:     "3 Months",
+	// 		ProjectDescription:  "Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo.",
+	// 		ProjectTechnologies: [4]string{"checked", "checked", "checked", "checked"},
+	// 	},
+	// 	{
+	// 		ProjectName:         "latihan project DumbWays",
+	// 		ProjectStartDate:    "20 October 2022",
+	// 		ProjectEndDate:      "21 November 2022",
+	// 		ProjectDuration:     "1 Month",
+	// 		ProjectDescription:  "Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo.",
+	// 		ProjectTechnologies: [4]string{"checked", "", "", "checked"},
+	// 	},
+}
+
+// MAIN
 func main() {
 	route := mux.NewRouter()
 
-	// route path folder untuk public
+	// ROUTE PUBLIC FOLDER
 	route.PathPrefix("/public/").Handler(http.StripPrefix("/public/", http.FileServer(http.Dir("./public"))))
 
-	//routing
-	route.HandleFunc("/hello", helloWorld).Methods("GET")
-	route.HandleFunc("/", home).Methods("GET")
-	route.HandleFunc("/contact", contact).Methods("GET")
-	route.HandleFunc("/blog", blog).Methods("GET")
-	route.HandleFunc("/blog-detail/{id}", blogDetail).Methods("GET")
-	route.HandleFunc("/form-blog", formAddBlog).Methods("GET")
-	route.HandleFunc("/add-blog", addBlog).Methods("POST")
+	// ROUTE RENDER HTML
+	route.HandleFunc("/", HomePage).Methods("GET")
+	route.HandleFunc("/contact", ContactPage).Methods("GET")
+	route.HandleFunc("/project", CreateProjectPage).Methods("GET")
+	route.HandleFunc("/detail-project/{index}", ProjectDetail).Methods("GET")
 
-	fmt.Println("Server running on port 5000")
+	// CREATE PROJECT
+	route.HandleFunc("/project/create", CreateProject).Methods("POST")
+	// UPDATE PROJECT
+	route.HandleFunc("/update-project/{index}", UpdateProject).Methods("GET")
+	// DELETE PROJECT
+	route.HandleFunc("/delete-project/{index}", DeleteProject).Methods("GET")
+
+	// PORT HANDLING
+	fmt.Println(("Server running on port 5000"))
 	http.ListenAndServe("localhost:5000", route)
 }
 
-func helloWorld(w http.ResponseWriter, r *http.Request) {
-	w.Write([]byte("Hello World!"))
-}
-
-func home(w http.ResponseWriter, r *http.Request) {
+// RENDER HOME PAGE
+func HomePage(w http.ResponseWriter, r *http.Request) {
 	w.Header().Set("Content-Type", "text/html; charset=utf-8")
 
-	var tmpl, err = template.ParseFiles("views/index.html")
+	tmpl, err := template.ParseFiles("views/index.html")
+	if err != nil {
+		w.WriteHeader(http.StatusInternalServerError)
+		w.Write([]byte("message : " + err.Error()))
+		return
+	}
+
+	response := map[string]interface{}{
+		"ProjectList": ProjectList,
+	}
+
+	w.WriteHeader(http.StatusOK)
+	tmpl.Execute(w, response)
+}
+
+// RENDER CONTACT PAGE
+func ContactPage(w http.ResponseWriter, r *http.Request) {
+	w.Header().Set("Content-Type", "text/html; charset=utf-8")
+
+	tmpl, err := template.ParseFiles("views/contact.html")
 	if err != nil {
 		w.WriteHeader(http.StatusInternalServerError)
 		w.Write([]byte("message : " + err.Error()))
@@ -47,13 +100,14 @@ func home(w http.ResponseWriter, r *http.Request) {
 	tmpl.Execute(w, nil)
 }
 
-func contact(w http.ResponseWriter, r *http.Request) {
+// RENDER ADD PROJECT PAGE
+func CreateProjectPage(w http.ResponseWriter, r *http.Request) {
 	w.Header().Set("Content-Type", "text/html; charset=utf-8")
 
-	var tmpl, err = template.ParseFiles("views/contact.html")
+	tmpl, err := template.ParseFiles("views/project.html")
 	if err != nil {
 		w.WriteHeader(http.StatusInternalServerError)
-		w.Write([]byte("Message : " + err.Error()))
+		w.Write([]byte("message : " + err.Error()))
 		return
 	}
 
@@ -61,64 +115,162 @@ func contact(w http.ResponseWriter, r *http.Request) {
 	tmpl.Execute(w, nil)
 }
 
-func blog(w http.ResponseWriter, r *http.Request) {
+// RENDER PROJECT DETAIL
+func ProjectDetail(w http.ResponseWriter, r *http.Request) {
 	w.Header().Set("Content-Type", "text/html; charset=utf-8")
 
-	var tmpl, err = template.ParseFiles("views/blog.html")
+	tmpl, err := template.ParseFiles("views/project-detail.html")
 	if err != nil {
 		w.WriteHeader(http.StatusInternalServerError)
-		w.Write([]byte("Message : " + err.Error()))
+		w.Write([]byte("message : " + err.Error()))
 		return
-	}
+	} else {
+		var renderDetail = Project{}
+		index, _ := strconv.Atoi(mux.Vars(r)["index"])
 
-	w.WriteHeader(http.StatusOK)
-	tmpl.Execute(w, nil)
+		for i, data := range ProjectList {
+			if index == i {
+				renderDetail = Project{
+					ProjectName:         data.ProjectName,
+					ProjectStartDate:    data.ProjectStartDate,
+					ProjectEndDate:      data.ProjectEndDate,
+					ProjectDuration:     data.ProjectDuration,
+					ProjectDescription:  data.ProjectDescription,
+					ProjectTechnologies: data.ProjectTechnologies,
+				}
+			}
+		}
+		data := map[string]interface{}{
+			"renderDetail": renderDetail,
+		}
+		w.WriteHeader(http.StatusOK)
+		tmpl.Execute(w, data)
+	}
 }
 
-func blogDetail(w http.ResponseWriter, r *http.Request) {
-	w.Header().Set("Content-Type", "text/html; charset=utf-8")
-
-	var tmpl, err = template.ParseFiles("views/blog-detail.html")
-	if err != nil {
-		w.WriteHeader(http.StatusInternalServerError)
-		w.Write([]byte("Message : " + err.Error()))
-		return
-	}
-
-	id, _ := strconv.Atoi(mux.Vars(r)["id"])
-
-	data := map[string]interface{}{
-		"Title":   "Pasar Coding di Indonesia Dinilai Masih Menjanjikan.",
-		"Content": "REPUBLIKA.CO.ID, JAKARTA -- Ketimpangan sumber daya manusia (SDM) disektor digital masih menjadi isu yang belum terpecahkan. Berdasarkan penelitian ManpowerGroup.REPUBLIKA.CO.ID, JAKARTA -- Ketimpangan sumber daya manusia (SDM) disektor digital masih menjadi isu yang belum terpecahkan. Berdasarkan penelitian ManpowerGroup.REPUBLIKA.CO.ID, JAKARTA -- Ketimpangan sumber daya manusia (SDM) disektor digital masih menjadi isu yang belum terpecahkan. Berdasarkan penelitian ManpowerGroup.",
-		"Id":      id,
-	}
-
-	w.WriteHeader(http.StatusOK)
-	tmpl.Execute(w, data)
-}
-
-func formAddBlog(w http.ResponseWriter, r *http.Request) {
-	w.Header().Set("Content-Type", "text/html; charset=utf-8")
-
-	var tmpl, err = template.ParseFiles("views/add-blog.html")
-	if err != nil {
-		w.WriteHeader(http.StatusBadRequest)
-		w.Write([]byte("Message : " + err.Error()))
-		return
-	}
-
-	w.WriteHeader(http.StatusOK)
-	tmpl.Execute(w, nil)
-}
-
-func addBlog(w http.ResponseWriter, r *http.Request) {
+// CREATE PROJECT
+func CreateProject(w http.ResponseWriter, r *http.Request) {
 	err := r.ParseForm()
+
 	if err != nil {
 		log.Fatal(err)
+	} else {
+		projectName := r.PostForm.Get("project-name")
+		projectStartDate := r.PostForm.Get("date-start")
+		projectEndDate := r.PostForm.Get("date-end")
+		projectDescription := r.PostForm.Get("project-description")
+		projectUseNode := r.PostForm.Get("node")
+		projectUseReact := r.PostForm.Get("react")
+		projectUsevue := r.PostForm.Get("vue")
+		projectUseGolang := r.PostForm.Get("golang")
+
+		var newProject = Project{
+			ProjectName:         projectName,
+			ProjectStartDate:    FormatDate(projectStartDate),
+			ProjectEndDate:      FormatDate(projectEndDate),
+			ProjectDuration:     GetDuration(projectStartDate, projectEndDate),
+			ProjectDescription:  projectDescription,
+			ProjectTechnologies: [4]string{projectUseNode, projectUseReact, projectUsevue, projectUseGolang},
+		}
+
+		ProjectList = append(ProjectList, newProject)
+		fmt.Println(newProject)
+
+		http.Redirect(w, r, "/", http.StatusMovedPermanently)
+	}
+}
+
+// DELETE PROJECT
+func DeleteProject(w http.ResponseWriter, r *http.Request) {
+
+	index, _ := strconv.Atoi(mux.Vars(r)["index"])
+
+	ProjectList = append(ProjectList[:index], ProjectList[index+1:]...)
+
+	http.Redirect(w, r, "/", http.StatusFound)
+}
+
+// GET PROJECT TO EDIT
+func UpdateProject(w http.ResponseWriter, r *http.Request) {
+	w.Header().Set("Content-Type", "text/html; charset=utf-8")
+
+	tmpl, err := template.ParseFiles("views/update-project.html")
+	if err != nil {
+		w.WriteHeader(http.StatusInternalServerError)
+		w.Write([]byte("message : " + err.Error()))
+		return
+	} else {
+		var updateData = Project{}
+		index, _ := strconv.Atoi(mux.Vars(r)["index"])
+
+		for i, data := range ProjectList {
+			if index == i {
+				updateData = Project{
+					ProjectName:         data.ProjectName,
+					ProjectStartDate:    ReturnDate(data.ProjectStartDate),
+					ProjectEndDate:      ReturnDate(data.ProjectEndDate),
+					ProjectDescription:  data.ProjectDescription,
+					ProjectTechnologies: data.ProjectTechnologies,
+				}
+				ProjectList = append(ProjectList[:index], ProjectList[index+1:]...)
+			}
+		}
+		data := map[string]interface{}{
+			"updateData": updateData,
+		}
+		w.WriteHeader(http.StatusOK)
+		tmpl.Execute(w, data)
+	}
+}
+
+// ADDITIONAL FUNCTION
+
+// GET DURATION
+func GetDuration(startDate string, endDate string) string {
+
+	layout := "2006-01-02"
+
+	date1, _ := time.Parse(layout, startDate)
+	date2, _ := time.Parse(layout, endDate)
+
+	margin := date2.Sub(date1).Hours() / 24
+	var duration string
+
+	if margin > 30 {
+		if (margin / 30) <= 1 {
+			duration = "1 Month"
+		} else {
+			duration = strconv.Itoa(int(margin)/30) + " Months"
+		}
+	} else {
+		if margin <= 1 {
+			duration = "1 Day"
+		} else {
+			duration = strconv.Itoa(int(margin)) + " Days"
+		}
 	}
 
-	fmt.Println("Title : " + r.PostForm.Get("inputTitle")) // value berdasarkan dari tag input name
-	fmt.Println("Content : " + r.PostForm.Get("inputContent"))
+	return duration
+}
 
-	http.Redirect(w, r, "/blog", http.StatusMovedPermanently)
+// FORMAT DATE
+func FormatDate(InputDate string) string {
+
+	layout := "2006-01-02"
+	t, _ := time.Parse(layout, InputDate)
+
+	Formated := t.Format("02 January 2006")
+
+	return Formated
+}
+
+// RETURN DATE FORMAT BEFORE EDIT
+func ReturnDate(InputDate string) string {
+
+	layout := "02 January 2006"
+	t, _ := time.Parse(layout, InputDate)
+
+	Formated := t.Format("2006-01-02")
+
+	return Formated
 }

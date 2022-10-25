@@ -1,4 +1,4 @@
-module day-7
+module task-8
 
 go 1.19
 

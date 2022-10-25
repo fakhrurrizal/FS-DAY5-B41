@@ -397,9 +397,7 @@ select{
     display: flex;
     margin-bottom: 50px;
 }
-.detail-blog-img p{
-   
-}
+
 .description-content p{
     text-align: justify;
     font-size: 17px;
@@ -418,4 +416,70 @@ select{
 .short-description i{
     font-size: 35px;
     padding: 20px 15px;
+}
+
+.btn-project:hover{
+    background-color: transparent;
+    color: black;
+    border: 1px solid black;
+}
+
+.icon-link {
+    width: 32px;
+    height: 32px;
+    cursor: pointer;
+    text-decoration: none;
+}
+
+.hero-card {
+    width: 350px;
+}
+.card-img{
+    width: 20%;
+}
+/* CONTACT */
+.contact-form,.project-form {
+    max-width: 540px;
+}
+
+/* PROJECT DETAIL */
+.detail-left img {
+    width: 100%;
+}
+
+.content-description {
+    background: transparent;
+    border: none;
+
+    width: 100%;
+}
+
+.tech-list {
+    width: 100%;
+}
+
+.tech-item {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 10px;
+}
+
+.tech-item img {
+    width: 32px;
+    height: 32px;
+}
+
+.tech-item p {
+    margin-top: 15px;
+}
+.project-content{
+    width: 40%;
+}
+.card-body a:hover{
+    background-color: transparent;
+    color: black;
+}
+.project-content .project-item{
+    display: flex;
 }
